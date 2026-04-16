@@ -1,30 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Minus, Plus, PlusCircle, Check } from 'lucide-react';
-import axios from 'axios';
 import { useCart } from '../context/CartContext';
+import { PRODUCTS } from '../data/products';
 
 const Shop = () => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(PRODUCTS);
   const [qtys, setQtys] = useState({});
-  const [loading, setLoading] = useState(true);
   const { addToCart } = useCart();
   const [addedStatus, setAddedStatus] = useState({});
 
   useEffect(() => {
-    // Fetch products from backend
-    axios.get('http://localhost:5000/api/products')
-      .then(res => {
-        setProducts(res.data);
-        const initialQtys = {};
-        res.data.forEach(p => initialQtys[p.id] = 1);
-        setQtys(initialQtys);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error("Error fetching products", err);
-        setLoading(false);
-      });
-  }, []);
+    const initialQtys = {};
+    products.forEach(p => initialQtys[p.id] = 1);
+    setQtys(initialQtys);
+  }, [products]);
 
   const changeQty = (id, delta) => {
     setQtys(prev => ({
@@ -47,8 +36,6 @@ const Shop = () => {
     }, 1500);
   };
 
-  if (loading) return <section id="products"><div>Loading products...</div></section>;
-
   return (
     <section id="products">
       <div className="products-header fade-up visible">
@@ -63,7 +50,8 @@ const Shop = () => {
         {products.map(p => (
           <div className="product-card fade-up visible" key={p.id}>
             <div className="product-img">
-                <img src={`/${p.img}`} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                {/* Use relative path for GitHub Pages compatibility */}
+                <img src={`./${p.img}`} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             <div className="product-info">
               <div className="product-name">{p.name}</div>

@@ -30,7 +30,7 @@ const Hero = () => {
       </div>
       <div className="hero-right">
         <div className="hero-img-wrap">
-          <img src="/mocha-hero-img.png"
+          <img src="./mocha-hero-img.png"
             style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0, zIndex: 0 }}
             alt="Mocha's Paradise Clinic" />
           <div className="hero-img-overlay"></div>

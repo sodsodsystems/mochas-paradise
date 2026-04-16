@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { CheckCircle2, X } from 'lucide-react';
 
 const Appointment = () => {
@@ -22,7 +21,7 @@ const Appointment = () => {
     setForm({ ...form, [e.target.id.replace('appt-', '').replace('-sel', '')]: e.target.value });
   };
 
-  const handleBook = async (e) => {
+  const handleBook = (e) => {
     e.preventDefault();
     if (!form.name || !form.phone || !form.email || !form.petname || !form.pettype || !form.service || !form.date || !form.time) {
       alert("Please fill in all required fields.");
@@ -30,30 +29,27 @@ const Appointment = () => {
     }
 
     setLoading(true);
-    try {
-      const res = await axios.post('http://localhost:5000/api/appointments', form);
-      if (res.data.success) {
-        setApptRef(res.data.ref);
-        setIsSuccess(true);
-        // Reset form
-        setForm({
-          name: '',
-          phone: '',
-          email: '',
-          petname: '',
-          pettype: '',
-          service: '',
-          date: '',
-          time: '',
-          notes: ''
-        });
-      }
-    } catch (err) {
-      console.error("Booking error", err);
-      alert("Something went wrong during booking.");
-    } finally {
+    
+    // SIMULATED SUCCESS (GitHub Pages compatible)
+    setTimeout(() => {
+      const ref = 'APT-' + Math.random().toString(36).substring(2, 9).toUpperCase();
+      setApptRef(ref);
+      setIsSuccess(true);
       setLoading(false);
-    }
+      
+      // Reset form
+      setForm({
+        name: '',
+        phone: '',
+        email: '',
+        petname: '',
+        pettype: '',
+        service: '',
+        date: '',
+        time: '',
+        notes: ''
+      });
+    }, 800);
   };
 
   const todayStr = new Date().toISOString().split('T')[0];

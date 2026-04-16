@@ -6,7 +6,7 @@ const About = () => {
     <section id="about">
       <div className="about-visual fade-up">
         <div className="about-img-box">
-          <img src="/mocha-abt-img.png" alt="Caring for Golden Retriever"
+          <img src="./mocha-abt-img.png" alt="Caring for Golden Retriever"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           <div className="about-paw-bg"><PawPrint size={240} /></div>
         </div>

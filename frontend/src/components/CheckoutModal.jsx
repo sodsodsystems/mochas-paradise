@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { X, Package, PartyPopper } from 'lucide-react';
-import axios from 'axios';
 import { useCart } from '../context/CartContext';
 
 const CheckoutModal = ({ isOpen, onClose }) => {
@@ -21,23 +20,27 @@ const CheckoutModal = ({ isOpen, onClose }) => {
     setDetails({ ...details, [e.target.id.replace('co-', '')]: e.target.value });
   };
 
-  const handlePlaceOrder = async () => {
+  const handlePlaceOrder = () => {
     if (!details.name || !details.phone || !details.email || !details.address || !details.city || !details.payment) {
       alert("Please fill in all required fields.");
       return;
     }
 
-    try {
-      const res = await axios.post('http://localhost:5000/api/checkout', { cart, details });
-      if (res.data.success) {
-        setOrderRef(res.data.ref);
-        setIsSuccess(true);
-        clearCart();
-      }
-    } catch (err) {
-      console.error("Checkout error", err);
-      alert("Something went wrong during checkout.");
-    }
+    // SIMULATED SUCCESS (GitHub Pages compatible)
+    // In a real environment, this would be an axios.post call
+    const ref = 'MP-' + Math.random().toString(36).substring(2, 9).toUpperCase();
+    setOrderRef(ref);
+    setIsSuccess(true);
+    
+    // Clear cart effectively
+    clearCart();
+    
+    console.log(`Simulated Order: ${ref}`);
+  };
+
+  const handleClose = () => {
+    setIsSuccess(false);
+    onClose();
   };
 
   if (!isOpen) return null;
@@ -49,7 +52,7 @@ const CheckoutModal = ({ isOpen, onClose }) => {
           <div id="checkoutForm">
             <div className="modal-header">
               <div className="modal-title">Checkout</div>
-              <button className="modal-close" onClick={onClose}><X size={24} /></button>
+              <button className="modal-close" onClick={handleClose}><X size={24} /></button>
             </div>
             <div className="modal-body">
               <div className="modal-section-title">Order Summary</div>
@@ -99,7 +102,7 @@ const CheckoutModal = ({ isOpen, onClose }) => {
             <div className="success-title">Order Confirmed!</div>
             <p className="success-subtitle">Thank you! We'll prepare your items and have them delivered soon. Check your email for details.</p>
             <div className="success-ref">Reference No: <strong id="orderRef">{orderRef}</strong></div>
-            <button className="modal-submit" style={{ maxWidth: '200px', marginTop: '1.5rem' }} onClick={onClose}>Done</button>
+            <button className="modal-submit" style={{ maxWidth: '200px', marginTop: '1.5rem' }} onClick={handleClose}>Done</button>
           </div>
         )}
       </div>

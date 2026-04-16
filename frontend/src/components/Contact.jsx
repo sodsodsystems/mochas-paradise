@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Phone, Mail, Instagram } from 'lucide-react';
+import { MapPin, Phone, Mail, Camera } from 'lucide-react';
 
 const Contact = () => {
   return (
@@ -32,7 +32,7 @@ const Contact = () => {
               </div>
             </div>
             <div className="contact-item">
-              <div className="contact-icon"><Instagram size={20} /></div>
+              <div className="contact-icon"><Camera size={20} /></div>
               <div>
                 <div className="contact-label">Social</div>
                 <div className="contact-value">@mochasparadiseph · Facebook &amp; Instagram</div>
