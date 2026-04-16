@@ -1,6 +1,6 @@
 import React from 'react';
 import { X, ShoppingBag, Package, Minus, Plus, Trash2 } from 'lucide-react';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../hooks/useCart';
 
 const CartSidebar = ({ onCheckout }) => {
   const { cart, isCartOpen, setIsCartOpen, updateCartQty, removeFromCart, subtotal } = useCart();

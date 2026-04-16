@@ -1584,8 +1584,9 @@ footer {
 }
 
 /* RESPONSIVE */
+.mobile-nav { display: none; }
+.mobile-menu-btn { display: none; }
 
-/* RESPONSIVE */
 @media (max-width: 1200px) {
   nav { padding: 1rem 3rem; }
   .hero-left { padding: 6rem 3rem 6rem 4rem; }

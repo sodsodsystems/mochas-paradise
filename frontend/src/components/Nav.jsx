@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ShoppingCart, Menu, X } from 'lucide-react';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../hooks/useCart';
 
 const Nav = () => {
   const { cartCount, setIsCartOpen } = useCart();

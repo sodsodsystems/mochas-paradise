@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, Package, PartyPopper } from 'lucide-react';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../hooks/useCart';
 
 const CheckoutModal = ({ isOpen, onClose }) => {
   const { cart, subtotal, clearCart } = useCart();
