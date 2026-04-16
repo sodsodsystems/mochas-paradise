@@ -1,0 +1,2405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mocha's Paradise | Premium Pet Care Clinic</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500&family=Jost:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --cream: #f7f1e8;
+      --warm-white: #fdf9f3;
+      --mocha: #50342a;
+      --mocha-light: #7a5444;
+      --mocha-dark: #3b2318;
+      --caramel: #b57a42;
+      --caramel-light: #e8b87a;
+      --sage: #7a8d6e;
+      --espresso: #1f120a;
+      --latte: #d4b896;
+      --text-dark: #2c1a0e;
+      --text-mid: #5a4030;
+      --text-light: #8d7366;
+      --glass-bg: rgba(247, 241, 232, 0.8);
+      --glass-border: rgba(92, 61, 46, 0.1);
+      --transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      --radius: 4px;
+      --shadow-sm: 0 2px 8px rgba(44, 26, 14, 0.05);
+      --shadow-md: 0 8px 24px rgba(44, 26, 14, 0.08);
+      --shadow-lg: 0 16px 48px rgba(44, 26, 14, 0.12);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      background: var(--warm-white);
+      color: var(--text-dark);
+      overflow-x: hidden;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--warm-white);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--mocha-light);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--mocha);
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 4rem;
+      background: var(--glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--glass-border);
+      transition: var(--transition);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+    }
+
+    .nav-logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--mocha-dark);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-logo-text span {
+      color: var(--caramel);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      text-decoration: none;
+      transition: var(--transition);
+      position: relative;
+      padding: 0.5rem 0;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--caramel);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--mocha);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      background: var(--mocha) !important;
+      color: var(--cream) !important;
+      padding: 0.8rem 1.6rem !important;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .nav-cta:hover {
+      background: var(--caramel) !important;
+      color: white !important;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .cart-btn {
+      position: relative;
+      background: var(--cream);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 0.7rem 1.2rem;
+      cursor: pointer;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      font-weight: 500;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      overflow: visible;
+    }
+
+    .cart-btn:hover {
+      border-color: var(--mocha);
+      color: var(--mocha);
+      background: var(--warm-white);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .cart-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .cart-count {
+      background: var(--caramel);
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      border: 2px solid var(--warm-white);
+    }
+
+    .cart-count.hidden {
+      display: none;
+    }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      padding-top: 80px;
+      overflow: hidden;
+      background: linear-gradient(to bottom, var(--cream), var(--warm-white));
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 4rem 6rem 6rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mocha);
+      margin-bottom: 2rem;
+      background: var(--glass-bg);
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      width: fit-content;
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero-badge i {
+      width: 16px;
+      height: 16px;
+      color: var(--caramel);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 6vw, 5.5rem);
+      line-height: 1;
+      color: var(--mocha-dark);
+      margin-bottom: 2rem;
+      font-weight: 700;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--caramel);
+      font-weight: 400;
+    }
+
+    .hero-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--text-mid);
+      line-height: 1.6;
+      max-width: 500px;
+      margin-bottom: 3.5rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: var(--mocha);
+      color: var(--cream);
+      padding: 1.1rem 2.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: var(--radius);
+      transition: var(--transition);
+      border: 2px solid var(--mocha);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-primary:hover {
+      background: transparent;
+      color: var(--mocha);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: transparent;
+      color: var(--mocha);
+      padding: 1.1rem 2.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: var(--radius);
+      border: 2px solid var(--mocha);
+      transition: var(--transition);
+    }
+
+    .btn-secondary:hover {
+      background: var(--mocha);
+      color: var(--cream);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 4rem;
+      margin-top: 5rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--mocha-dark);
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-img-wrap {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #c8a882 0%, #8a6a50 40%, #4a2e1a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, var(--warm-white) 0%, transparent 20%);
+      z-index: 2;
+    }
+
+    .hero-img-pattern {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 30% 50%, rgba(200, 146, 90, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(138, 158, 126, 0.2) 0%, transparent 40%);
+      z-index: 1;
+    }
+
+    .hero-paw-deco {
+      position: absolute;
+      font-size: 12rem;
+      color: rgba(255, 255, 255, 0.06);
+      z-index: 1;
+      transform: rotate(-20deg);
+    }
+
+    .hero-illustration {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+    }
+
+    .hero-illustration svg {
+      width: 300px;
+      height: 300px;
+      filter: drop-shadow(0 20px 60px rgba(44, 26, 14, 0.4));
+    }
+
+    /* SECTIONS */
+    section {
+      position: relative;
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--caramel);
+      margin-bottom: 1rem;
+    }
+
+    .section-tag::after {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--caramel);
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      line-height: 1.15;
+      color: var(--mocha-dark);
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--caramel);
+    }
+
+    /* SERVICES */
+    #services {
+      padding: 10rem 6rem;
+      background: var(--cream);
+    }
+
+    .services-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 5rem;
+    }
+
+    .services-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      color: var(--text-mid);
+      max-width: 420px;
+      line-height: 1.6;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background: var(--warm-white);
+      padding: 3.5rem 2.5rem;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      border: 1px solid var(--glass-border);
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      background: white;
+      border-color: var(--caramel-light);
+    }
+
+    .service-icon {
+      color: var(--caramel);
+    }
+
+    .service-icon svg {
+      width: 40px;
+      height: 40px;
+      stroke-width: 1.5px;
+    }
+
+    .service-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--mocha-dark);
+      font-weight: 700;
+      margin-bottom: -0.5rem;
+    }
+
+    .service-text {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+      opacity: 0.85;
+    }
+
+    .service-price {
+      margin-top: auto;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      color: var(--caramel);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding-top: 1rem;
+      border-top: 1px solid var(--glass-border);
+    }
+
+    /* ABOUT */
+    #about {
+      padding: 10rem 6rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8rem;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-img-box {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: var(--mocha-light);
+      border-radius: var(--radius);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      transition: var(--transition);
+    }
+
+    .about-img-box:hover {
+      transform: scale(1.02);
+    }
+
+    .about-paw-bg {
+      position: absolute;
+      bottom: -2rem;
+      right: -2rem;
+      opacity: 0.05;
+      color: var(--mocha-dark);
+      transform: rotate(15deg);
+      pointer-events: none;
+    }
+
+    .about-paw-bg svg {
+      width: 240px;
+      height: 240px;
+    }
+
+    .about-accent-box {
+      position: absolute;
+      bottom: -2rem;
+      right: -2rem;
+      background: var(--mocha-dark);
+      color: var(--cream);
+      padding: 2.5rem;
+      text-align: center;
+      min-width: 180px;
+      box-shadow: var(--shadow-lg);
+      border-radius: var(--radius);
+      z-index: 10;
+    }
+
+    .about-accent-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: var(--caramel-light);
+      display: block;
+      font-weight: 700;
+    }
+
+    .about-accent-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--latte);
+      margin-top: 0.5rem;
+      font-weight: 500;
+    }
+
+    .about-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      color: var(--text-mid);
+      line-height: 1.85;
+      margin: 1.5rem 0 2rem;
+    }
+
+    .about-features {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .about-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .feature-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--caramel);
+      flex-shrink: 0;
+      margin-top: 0.4rem;
+    }
+
+    .feature-text {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+
+    /* PRODUCTS */
+    #products {
+      padding: 10rem 6rem;
+      background: var(--mocha-dark);
+    }
+
+    .products-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 5rem;
+    }
+
+    .products-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      color: var(--latte);
+      max-width: 400px;
+      line-height: 1.6;
+      opacity: 0.8;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+
+    .product-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius);
+      transition: var(--transition);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: var(--caramel);
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .product-img {
+      width: 100%;
+      aspect-ratio: 1;
+      overflow: hidden;
+      flex-shrink: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .product-info {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .product-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .product-desc {
+      font-size: 0.85rem;
+      color: var(--latte);
+      opacity: 0.6;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      flex: 1;
+    }
+
+    .product-price {
+      font-family: 'Jost', serif;
+      font-size: 1.1rem;
+      color: var(--caramel-light);
+      font-weight: 500;
+    }
+
+    .product-qty-row {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-top: 1.2rem;
+    }
+
+    .qty-btn {
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--cream);
+      cursor: pointer;
+      border-radius: 4px;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .qty-btn:hover {
+      background: var(--caramel);
+      color: white;
+      border-color: var(--caramel);
+    }
+
+    .qty-display {
+      color: var(--cream);
+      font-size: 1rem;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    .product-add {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      width: 100%;
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: transparent;
+      border: 1px solid var(--caramel);
+      color: var(--caramel-light);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: var(--transition);
+      border-radius: var(--radius);
+    }
+
+    .product-add:hover {
+      background: var(--caramel);
+      color: white;
+      transform: scale(1.02);
+    }
+
+    .product-add.added {
+      background: var(--sage);
+      border-color: var(--sage);
+      color: white;
+    }
+
+    .product-add svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* CART SIDEBAR */
+    .cart-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(44, 26, 14, 0.5);
+      z-index: 1100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .cart-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .cart-sidebar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 420px;
+      max-width: 95vw;
+      background: var(--warm-white);
+      z-index: 1200;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      box-shadow: -8px 0 40px rgba(44, 26, 14, 0.15);
+    }
+
+    .cart-sidebar.open {
+      transform: translateX(0);
+    }
+
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid rgba(92, 61, 46, 0.12);
+    }
+
+    .cart-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--mocha-dark);
+    }
+
+    .cart-close {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--text-mid);
+      transition: color 0.2s;
+    }
+
+    .cart-close:hover {
+      color: var(--mocha);
+    }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1.5rem 2rem;
+    }
+
+    .cart-empty {
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+
+    .cart-empty-icon {
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(92, 61, 46, 0.08);
+    }
+
+    .cart-item-icon {
+      font-size: 1.8rem;
+      width: 50px;
+      height: 50px;
+      background: var(--cream);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--mocha-dark);
+      margin-bottom: 0.2rem;
+    }
+
+    .cart-item-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--caramel);
+    }
+
+    .cart-item-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .ci-qty-btn {
+      width: 26px;
+      height: 26px;
+      background: var(--cream);
+      border: 1px solid rgba(92, 61, 46, 0.2);
+      color: var(--text-mid);
+      font-size: 0.9rem;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+
+    .ci-qty-btn:hover {
+      background: var(--caramel);
+      color: white;
+      border-color: var(--caramel);
+    }
+
+    .ci-qty {
+      font-size: 0.85rem;
+      color: var(--text-dark);
+      min-width: 20px;
+      text-align: center;
+    }
+
+    .cart-remove {
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 1rem;
+      cursor: pointer;
+      margin-left: 0.3rem;
+      transition: color 0.2s;
+    }
+
+    .cart-remove:hover {
+      color: #c0392b;
+    }
+
+    .cart-footer {
+      padding: 1.5rem 2rem;
+      border-top: 1px solid rgba(92, 61, 46, 0.12);
+    }
+
+    .cart-subtotal {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1.2rem;
+      align-items: center;
+    }
+
+    .cart-subtotal-label {
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .cart-subtotal-val {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--mocha-dark);
+    }
+
+    .checkout-btn {
+      width: 100%;
+      padding: 1rem;
+      background: var(--mocha);
+      color: var(--cream);
+      border: none;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+
+    .checkout-btn:hover {
+      background: var(--caramel);
+      color: var(--mocha-dark);
+    }
+
+    /* MODALS */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(44, 26, 14, 0.6);
+      z-index: 1300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-box {
+      background: var(--warm-white);
+      border-radius: 4px;
+      max-width: 520px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 80px rgba(44, 26, 14, 0.3);
+      transform: scale(0.95);
+      transition: transform 0.3s;
+    }
+
+    .modal-overlay.open .modal-box {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      padding: 2rem 2rem 1rem;
+      border-bottom: 1px solid rgba(92, 61, 46, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--mocha-dark);
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      cursor: pointer;
+      color: var(--text-mid);
+    }
+
+    .modal-body {
+      padding: 1.5rem 2rem 2rem;
+    }
+
+    .modal-section-title {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--caramel);
+      margin: 1.2rem 0 0.8rem;
+    }
+
+    .order-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      padding: 0.3rem 0;
+    }
+
+    .order-total {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(92, 61, 46, 0.12);
+      font-weight: 600;
+      align-items: center;
+    }
+
+    .order-total span:first-child {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-mid);
+    }
+
+    .order-total span:last-child {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--mocha-dark);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .form-group label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 1rem 1.2rem;
+      background: var(--warm-white);
+      border: 1.5px solid var(--glass-border);
+      border-radius: var(--radius);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text-dark);
+      outline: none;
+      transition: var(--transition);
+      -webkit-appearance: none;
+      appearance: none;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--caramel);
+      background: white;
+      box-shadow: 0 0 0 3px rgba(181, 122, 66, 0.1);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .modal-submit {
+      width: 100%;
+      padding: 1.15rem;
+      background: var(--mocha);
+      color: var(--cream);
+      border: none;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: var(--radius);
+      transition: var(--transition);
+      margin-top: 1rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .modal-submit:hover {
+      background: var(--caramel);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* SUCCESS */
+    .success-screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+
+    .success-screen.show {
+      display: flex;
+    }
+
+    .success-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    .success-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--mocha-dark);
+      margin-bottom: 0.8rem;
+    }
+
+    .success-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .success-ref {
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    .success-ref strong {
+      color: var(--caramel);
+    }
+
+    /* APPOINTMENT SECTION */
+    #appointment {
+      padding: 10rem 6rem;
+      background: var(--cream);
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 8rem;
+      align-items: start;
+    }
+
+    .appt-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+      margin: 2rem 0 3rem;
+    }
+
+    .appt-hours {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      background: var(--warm-white);
+      padding: 2.5rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .appt-hour-row {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--glass-border);
+      font-size: 0.9rem;
+      align-items: center;
+    }
+
+    .appt-hour-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .appt-day {
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+
+    .appt-time-label {
+      color: var(--caramel);
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .appt-form {
+      background: white;
+      padding: 4rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--glass-border);
+    }
+
+    .form-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--mocha-dark);
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+    }
+
+    .form-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      margin-bottom: 3rem;
+    }
+
+    .appt-submit {
+      width: 100%;
+      padding: 1.2rem;
+      background: var(--mocha);
+      color: var(--cream);
+      border: none;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: var(--radius);
+      transition: var(--transition);
+      margin-top: 1rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .appt-submit:hover {
+      background: var(--caramel);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* CONTACT */
+    #contact {
+      padding: 10rem 6rem;
+      background: var(--warm-white);
+    }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 8rem;
+    }
+
+    .contact-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+      margin: 1.5rem 0 3.5rem;
+    }
+
+    .contact-items {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      transition: var(--transition);
+    }
+
+    .contact-item:hover {
+      transform: translateX(10px);
+    }
+
+    .contact-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--cream);
+      color: var(--mocha);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border-radius: 50%;
+      border: 1px solid var(--glass-border);
+      transition: var(--transition);
+    }
+
+    .contact-item:hover .contact-icon {
+      background: var(--mocha);
+      color: white;
+      border-color: var(--mocha);
+    }
+
+    .contact-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .contact-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .contact-value {
+      font-size: 1rem;
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+
+    .contact-value a {
+      color: inherit;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .contact-value a:hover {
+      color: var(--caramel);
+    }
+
+    .map-placeholder {
+      background: linear-gradient(135deg, var(--cream) 0%, var(--mocha-light) 100%);
+      border-radius: var(--radius);
+      min-height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .map-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+    }
+
+    .map-pin {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .map-pin-icon {
+      color: var(--mocha);
+      display: block;
+      margin-bottom: 1.5rem;
+      filter: drop-shadow(0 8px 16px rgba(44, 26, 14, 0.3));
+      transform-origin: bottom;
+      animation: pinJump 2s ease-in-out infinite;
+    }
+
+    @keyframes pinJump {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    .map-pin-icon svg {
+      width: 64px;
+      height: 64px;
+    }
+
+    .map-pin-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--mocha-dark);
+      background: rgba(255, 255, 255, 0.9);
+      padding: 0.8rem 1.8rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      box-shadow: var(--shadow-md);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--espresso);
+      color: var(--latte);
+      padding: 6rem 6rem 3rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr 1fr;
+      gap: 6rem;
+      padding-bottom: 4rem;
+      border-bottom: 1px solid rgba(212, 184, 150, 0.1);
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--cream);
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+    }
+
+    .footer-brand-name span {
+      color: var(--caramel);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .footer-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      color: var(--latte);
+      opacity: 0.8;
+      line-height: 1.6;
+    }
+
+    .footer-col-title {
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 1.8rem;
+      font-weight: 600;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .footer-links a {
+      font-size: 0.95rem;
+      color: var(--latte);
+      opacity: 0.6;
+      text-decoration: none;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .footer-links a:hover {
+      opacity: 1;
+      color: var(--caramel-light);
+      transform: translateX(5px);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: rgba(212, 184, 150, 0.3);
+    }
+
+    .footer-bottom i {
+      color: var(--caramel);
+      margin: 0 0.3rem;
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(120px);
+      background: var(--mocha-dark);
+      color: var(--cream);
+      padding: 0.9rem 1.8rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      z-index: 2000;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 8px 30px rgba(44, 26, 14, 0.3);
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ANIMATIONS */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      nav {
+        padding: 1.2rem 2.5rem;
+      }
+
+      #hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-left {
+        padding: 8rem 2.5rem 5rem;
+        align-items: center;
+      }
+
+      .hero-badge {
+        margin: 0 auto 2rem;
+      }
+
+      .hero-subtitle {
+        margin: 0 auto 3.5rem;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .hero-stats {
+        justify-content: center;
+        gap: 3rem;
+        margin-top: 4rem;
+      }
+
+      .hero-right {
+        display: none;
+      }
+
+      #services,
+      #products,
+      #contact {
+        padding: 7rem 2.5rem;
+      }
+
+      #about,
+      #appointment {
+        grid-template-columns: 1fr;
+        padding: 7rem 2.5rem;
+        gap: 5rem;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+
+      .services-header,
+      .products-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 2rem;
+      }
+
+      .services-desc,
+      .products-desc {
+        max-width: 500px;
+      }
+
+      footer {
+        padding: 5rem 2.5rem 3rem;
+      }
+
+      .footer-top {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3.5rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links li:not(:last-child):not(:nth-last-child(2)) {
+        display: none;
+      }
+
+      .nav-logo-text {
+        font-size: 1.3rem;
+      }
+
+      .hero-title {
+        font-size: 3rem;
+      }
+
+      .services-grid,
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stats {
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .stat-num {
+        font-size: 2rem;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+      }
+
+      .cart-sidebar {
+        width: 100%;
+      }
+
+      .about-accent-box {
+        right: 0;
+        bottom: -1rem;
+        padding: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- CART OVERLAY + SIDEBAR -->
+  <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <div class="cart-title">Your Cart</div>
+      <button class="cart-close" onclick="closeCart()">&#10005;</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty">
+        <span class="cart-empty-icon"><i data-lucide="shopping-bag"
+            style="width:48px;height:48px;color:var(--text-light)"></i></span>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text-mid);margin-top:1rem">Your
+          cart is empty.</p>
+      </div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none">
+      <div class="cart-subtotal">
+        <span class="cart-subtotal-label">Total</span>
+        <span class="cart-subtotal-val" id="cartTotal">&#8369;0</span>
+      </div>
+      <button class="checkout-btn" onclick="openCheckout()">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <!-- CHECKOUT MODAL -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="modal-box">
+      <div id="checkoutForm">
+        <div class="modal-header">
+          <div class="modal-title">Checkout</div>
+          <button class="modal-close" onclick="closeCheckout()">&#10005;</button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-section-title">Order Summary</div>
+          <div id="orderSummaryItems"></div>
+          <div class="order-total" style="margin-top:0.5rem">
+            <span>Total</span><span id="orderTotal">&#8369;0</span>
+          </div>
+          <div class="modal-section-title" style="margin-top:1.8rem">Your Details</div>
+          <div class="form-row">
+            <div class="form-group"><label>Full Name *</label><input type="text" id="co-name"
+                placeholder="Maria Santos" /></div>
+            <div class="form-group"><label>Phone *</label><input type="tel" id="co-phone"
+                placeholder="+63 9XX XXX XXXX" /></div>
+          </div>
+          <div class="form-group"><label>Email *</label><input type="email" id="co-email"
+              placeholder="maria@email.com" /></div>
+          <div class="modal-section-title">Delivery Address</div>
+          <div class="form-group"><label>Street Address *</label><input type="text" id="co-address"
+              placeholder="123 Sample St, Brgy. Example" /></div>
+          <div class="form-row">
+            <div class="form-group"><label>City *</label><input type="text" id="co-city" placeholder="Quezon City" />
+            </div>
+            <div class="form-group"><label>Province</label><input type="text" id="co-province"
+                placeholder="Metro Manila" /></div>
+          </div>
+          <div class="modal-section-title">Payment Method</div>
+          <div class="form-group">
+            <label>Select Payment *</label>
+            <select id="co-payment">
+              <option value="">Choose...</option>
+              <option value="gcash">GCash</option>
+              <option value="maya">Maya</option>
+              <option value="cod">Cash on Delivery</option>
+              <option value="bank">Bank Transfer</option>
+            </select>
+          </div>
+          <button class="modal-submit" onclick="placeOrder()">Place Order</button>
+        </div>
+      </div>
+      <div class="success-screen" id="orderSuccess">
+        <div class="success-icon"><i data-lucide="party-popper" style="width:64px;height:64px;color:var(--caramel)"></i>
+        </div>
+        <div class="success-title">Order Confirmed!</div>
+        <p class="success-subtitle">Thank you! We'll prepare your items and have them delivered soon. Check your email
+          for details.</p>
+        <div class="success-ref">Reference No: <strong id="orderRef"></strong></div>
+        <button class="modal-submit" style="max-width:200px;margin-top:1.5rem" onclick="closeCheckout()">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPOINTMENT CONFIRMATION MODAL -->
+  <div class="modal-overlay" id="apptModal">
+    <div class="modal-box">
+      <div class="success-screen show">
+        <div class="success-icon"><i data-lucide="check-circle-2" style="width:64px;height:64px;color:var(--sage)"></i>
+        </div>
+        <div class="success-title">Appointment Booked!</div>
+        <p class="success-subtitle">Your appointment has been received. We'll confirm within 24 hours via phone or
+          email. See you soon!</p>
+        <div class="success-ref">Reference: <strong id="apptRef"></strong></div>
+        <button class="modal-submit" style="max-width:200px;margin-top:1.5rem" onclick="closeApptModal()">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav id="mainNav">
+    <a href="#hero" class="nav-logo">
+      <img src="MochasParadiseLogo.png" alt="Mocha's Paradise"
+        style="width: 42px; height: 42px; object-fit: contain;" />
+      <div class="nav-logo-text">Mocha's <span>Paradise</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#products">Shop</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li>
+        <button class="cart-btn" onclick="openCart()">
+          <i data-lucide="shopping-cart"></i>
+          <span>Cart</span>
+          <span class="cart-count hidden" id="cartCount">0</span>
+        </button>
+      </li>
+      <li><a href="#appointment" class="nav-cta">Book Now</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-left">
+      <div class="hero-badge"><i data-lucide="sparkles"></i> Premium Pet Care Since 2018</div>
+      <h1 class="hero-title">Where Pets<br>Find Their<br><em>Paradise</em></h1>
+      <p class="hero-subtitle">Expert veterinary care wrapped in warmth and love — because your furry family deserves
+        nothing less than extraordinary.</p>
+      <div class="hero-buttons">
+        <a href="#appointment" class="btn-primary">Book Appointment <i data-lucide="calendar"></i></a>
+        <a href="#services" class="btn-secondary">Our Services</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">2,400+</div>
+          <div class="stat-label">Happy Pets</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">12</div>
+          <div class="stat-label">Expert Vets</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">6 yrs</div>
+          <div class="stat-label">Of Care</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-img-wrap">
+        <img src="mocha-hero-img.png"
+          style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; z-index: 0;"
+          alt="Mocha's Paradise Clinic">
+        <div class="hero-img-overlay"></div>
+        <div class="hero-img-pattern"></div>
+        <span class="hero-paw-deco"><i data-lucide="paw-print" style="width:200px;height:200px"></i></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="services-header fade-up">
+      <div>
+        <span class="section-tag">What We Offer</span>
+        <h2 class="section-title">Care Tailored for<br><em>Every Companion</em></h2>
+      </div>
+      <p class="services-desc">From routine wellness to specialized treatment, we provide comprehensive care with
+        compassion and expertise.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <div class="service-icon"><i data-lucide="stethoscope"></i></div>
+        <div class="service-name">General Wellness</div>
+        <p class="service-text">Complete physical exams, vaccinations, parasite prevention, and routine health
+          monitoring for long, happy lives.</p>
+        <div class="service-price">From &#8369;500</div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon"><i data-lucide="sparkle"></i></div>
+        <div class="service-name">Dental Care</div>
+        <p class="service-text">Professional teeth cleaning, oral health assessments, and dental procedures under safe
+          anesthesia protocols.</p>
+        <div class="service-price">From &#8369;1,200</div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon"><i data-lucide="microscope"></i></div>
+        <div class="service-name">Diagnostics &amp; Lab</div>
+        <p class="service-text">In-house blood panels, urinalysis, digital X-rays, and ultrasound for fast, accurate
+          diagnosis.</p>
+        <div class="service-price">From &#8369;800</div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon"><i data-lucide="syringe"></i></div>
+        <div class="service-name">Vaccinations</div>
+        <p class="service-text">Core and non-core vaccines on a personalized schedule to keep your pet protected
+          year-round.</p>
+        <div class="service-price">From &#8369;350</div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon"><i data-lucide="scissors"></i></div>
+        <div class="service-name">Grooming &amp; Spa</div>
+        <p class="service-text">Full bath, breed-specific styling, nail trim, ear cleaning, and de-shedding treatments
+          by certified groomers.</p>
+        <div class="service-price">From &#8369;450</div>
+      </div>
+      <div class="service-card fade-up">
+        <div class="service-icon"><i data-lucide="hospital"></i></div>
+        <div class="service-name">Surgery &amp; Recovery</div>
+        <p class="service-text">Soft tissue surgery, spay &amp; neuter procedures, and monitored post-operative recovery
+          in a calm environment.</p>
+        <div class="service-price">From &#8369;2,500</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-visual fade-up">
+      <div class="about-img-box">
+        <img src="mocha-abt-img.png" alt="Caring for Golden Retriever"
+          style="width: 100%; height: 100%; object-fit: cover;">
+        <div class="about-paw-bg"><i data-lucide="paw-print"></i></div>
+      </div>
+      <div class="about-accent-box">
+        <span class="about-accent-num">98%</span>
+        <div class="about-accent-label">Client Satisfaction</div>
+      </div>
+    </div>
+    <div class="about-content fade-up">
+      <span class="section-tag">Our Story</span>
+      <h2 class="section-title">A Sanctuary Built<br>on <em>Love &amp; Trust</em></h2>
+      <p class="about-body">Mocha's Paradise was born from a simple belief — that every pet deserves to be treated like
+        family. Founded by Dr. Maria Santos in 2018, our clinic combines clinical excellence with a deeply personal
+        approach to animal wellness.<br><br>We named our clinic after Mocha, the golden retriever who inspired our
+        founder to pursue veterinary medicine. Her spirit lives on in the warm, nurturing environment we've built for
+        every pet that walks through our doors.</p>
+      <div class="about-features">
+        <div class="about-feature">
+          <div class="feature-dot"></div>
+          <div class="feature-text">Fully equipped in-house laboratory for same-day diagnostic results</div>
+        </div>
+        <div class="about-feature">
+          <div class="feature-dot"></div>
+          <div class="feature-text">Separate wards for cats and dogs to minimize stress and anxiety</div>
+        </div>
+        <div class="about-feature">
+          <div class="feature-dot"></div>
+          <div class="feature-text">Fear-free certified staff trained in low-stress handling techniques</div>
+        </div>
+        <div class="about-feature">
+          <div class="feature-dot"></div>
+          <div class="feature-text">Emergency care available 7 days a week with on-call veterinarians</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="products">
+    <div class="products-header fade-up">
+      <div>
+        <span class="section-tag" style="color:var(--caramel-light)">Our Shop</span>
+        <h2 class="section-title" style="color:var(--cream)">Premium Products for<br><em
+            style="color:var(--caramel-light)">Your Beloved Pets</em></h2>
+      </div>
+      <p class="products-desc">Curated essentials, supplements, and treats — only the finest for your companion.</p>
+    </div>
+    <div class="products-grid" id="productsGrid"></div>
+  </section>
+
+  <!-- APPOINTMENT -->
+  <section id="appointment">
+    <div class="appt-info fade-up">
+      <span class="section-tag">Schedule a Visit</span>
+      <h2 class="section-title">Book an<br><em>Appointment</em></h2>
+      <p class="appt-body">Scheduling a visit is simple and stress-free. Choose your preferred service, date, and time —
+        and we'll take care of the rest with the warmth your pet deserves.</p>
+      <div class="appt-hours">
+        <div class="appt-hour-row"><span class="appt-day">Monday – Friday</span><span class="appt-time-label">8:00 AM –
+            7:00 PM</span></div>
+        <div class="appt-hour-row"><span class="appt-day">Saturday</span><span class="appt-time-label">9:00 AM – 6:00
+            PM</span></div>
+        <div class="appt-hour-row"><span class="appt-day">Sunday</span><span class="appt-time-label">10:00 AM – 4:00
+            PM</span></div>
+        <div class="appt-hour-row"><span class="appt-day">Emergency Line</span><span class="appt-time-label">24 / 7
+            Available</span></div>
+      </div>
+    </div>
+    <div class="appt-form fade-up">
+      <div class="form-title">Reserve Your Slot</div>
+      <div class="form-subtitle">We'll confirm your appointment within 24 hours.</div>
+      <div class="form-row">
+        <div class="form-group"><label>Your Name *</label><input type="text" id="appt-name" placeholder="Full name" />
+        </div>
+        <div class="form-group"><label>Phone Number *</label><input type="tel" id="appt-phone"
+            placeholder="+63 9XX XXX XXXX" /></div>
+      </div>
+      <div class="form-group"><label>Email *</label><input type="email" id="appt-email" placeholder="your@email.com" />
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Pet's Name *</label><input type="text" id="appt-petname"
+            placeholder="Your pet's name" /></div>
+        <div class="form-group"><label>Pet Type *</label>
+          <select id="appt-pettype">
+            <option value="">Select...</option>
+            <option>Dog</option>
+            <option>Cat</option>
+            <option>Rabbit</option>
+            <option>Bird</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Service *</label>
+          <select id="appt-service">
+            <option value="">Select service...</option>
+            <option>General Wellness</option>
+            <option>Dental Care</option>
+            <option>Diagnostics &amp; Lab</option>
+            <option>Vaccinations</option>
+            <option>Grooming &amp; Spa</option>
+            <option>Surgery Consultation</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Preferred Date *</label><input type="date" id="appt-date" /></div>
+      </div>
+      <div class="form-group"><label>Preferred Time *</label>
+        <select id="appt-time-sel">
+          <option value="">Select time...</option>
+          <option>8:00 AM</option>
+          <option>9:00 AM</option>
+          <option>10:00 AM</option>
+          <option>11:00 AM</option>
+          <option>1:00 PM</option>
+          <option>2:00 PM</option>
+          <option>3:00 PM</option>
+          <option>4:00 PM</option>
+          <option>5:00 PM</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Notes (Optional)</label><textarea id="appt-notes"
+          placeholder="Any symptoms, concerns, or special requests..."></textarea></div>
+      <button class="appt-submit" onclick="bookAppointment()">Confirm Appointment</button>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-inner">
+      <div class="contact-info fade-up">
+        <span class="section-tag">Find Us</span>
+        <h2 class="section-title">Visit<br><em>Our Clinic</em></h2>
+        <p class="contact-body">Nestled in the heart of the neighborhood, Mocha's Paradise is designed to feel less like
+          a clinic and more like a warm, welcoming home for your pets.</p>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-icon"><i data-lucide="map-pin"></i></div>
+            <div>
+              <div class="contact-label">Address</div>
+              <div class="contact-value">123 Paws Avenue, Quezon City<br>Metro Manila, Philippines</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i data-lucide="phone"></i></div>
+            <div>
+              <div class="contact-label">Phone</div>
+              <div class="contact-value">(02) 8123-4567 &nbsp;|&nbsp; 0917-000-1234</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i data-lucide="mail"></i></div>
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-value"><a href="mailto:hello@mochasparadise.com">hello@mochasparadise.com</a></div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon"><i data-lucide="instagram"></i></div>
+            <div>
+              <div class="contact-label">Social</div>
+              <div class="contact-value">@mochasparadiseph · Facebook &amp; Instagram</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="map-placeholder fade-up">
+        <div class="map-pin">
+          <span class="map-pin-icon"><i data-lucide="map-pin"></i></span>
+          <div class="map-pin-label">Mocha's Paradise</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">Mocha's <span>Paradise</span></div>
+        <p class="footer-tagline">Premium veterinary care<br>delivered with love and expertise.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="#services">General Wellness</a></li>
+          <li><a href="#services">Dental Care</a></li>
+          <li><a href="#services">Grooming &amp; Spa</a></li>
+          <li><a href="#services">Surgery</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Clinic</div>
+        <ul class="footer-links">
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#products">Shop</a></li>
+          <li><a href="#appointment">Book Appointment</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Hours</div>
+        <ul class="footer-links">
+          <li><a href="#">Mon–Fri: 8am–7pm</a></li>
+          <li><a href="#">Saturday: 9am–6pm</a></li>
+          <li><a href="#">Sunday: 10am–4pm</a></li>
+          <li><a href="#">Emergency: 24/7</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2024 Mocha's Paradise Pet Care Clinic. All rights reserved.</span>
+      <span>Made with <i data-lucide="heart" style="width:14px;height:14px;fill:var(--caramel);stroke:none"></i> for
+        pets everywhere</span>
+    </div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script>
+    // ── PRODUCTS DATA ──
+    var PRODUCTS = [
+      { id: 1, name: 'Premium Kibble', desc: 'Grain-free, high-protein formula for dogs and cats of all breeds and life stages.', price: 890, unit: '2kg', img: 'product-1.png' },
+      { id: 2, name: 'Daily Vitamins', desc: 'Vet-formulated multivitamin chews for immune support, coat health, and joint care.', price: 550, unit: '60 pcs', img: 'product-2.png' },
+      { id: 3, name: 'Medicated Shampoo', desc: 'Antifungal and antibacterial formula gentle enough for sensitive, allergy-prone skin.', price: 420, unit: '250ml', img: 'product-3.png' },
+      { id: 4, name: 'Dental Treats', desc: 'Clinically proven treats that reduce plaque and tartar while freshening breath.', price: 320, unit: '30 pcs', img: 'product-4.png' }
+    ];
+
+    var cart = [];
+
+    // ── RENDER PRODUCTS ──
+    function renderProducts() {
+      var grid = document.getElementById('productsGrid');
+      grid.innerHTML = PRODUCTS.map(function (p) {
+        return '<div class="product-card fade-up" id="pc-' + p.id + '">' +
+          '<div class="product-img"><img src="' + p.img + '" alt="' + p.name + '" style="width: 100%; height: 100%; object-fit: cover;"></div>' +
+          '<div class="product-info">' +
+          '<div class="product-name">' + p.name + '</div>' +
+          '<p class="product-desc">' + p.desc + '</p>' +
+          '<div class="product-price">&#8369;' + p.price.toLocaleString() + ' / ' + p.unit + '</div>' +
+          '<div class="product-qty-row">' +
+          '<button class="qty-btn" onclick="changeQty(' + p.id + ',-1)"><i data-lucide="minus"></i></button>' +
+          '<span class="qty-display" id="qty-' + p.id + '">1</span>' +
+          '<button class="qty-btn" onclick="changeQty(' + p.id + ',1)"><i data-lucide="plus"></i></button>' +
+          '</div>' +
+          '<button class="product-add" id="add-' + p.id + '" onclick="addToCart(' + p.id + ')"><i data-lucide="plus-circle"></i> Add to Cart</button>' +
+          '</div>' +
+          '</div>';
+      }).join('');
+      lucide.createIcons();
+      observeFadeUps();
+    }
+
+    function changeQty(id, delta) {
+      var el = document.getElementById('qty-' + id);
+      var val = parseInt(el.textContent) + delta;
+      if (val < 1) val = 1;
+      if (val > 99) val = 99;
+      el.textContent = val;
+    }
+
+    function addToCart(id) {
+      var product = PRODUCTS.find(function (p) { return p.id === id; });
+      var qty = parseInt(document.getElementById('qty-' + id).textContent);
+      var existing = cart.find(function (i) { return i.id === id; });
+      if (existing) {
+        existing.qty += qty;
+      } else {
+        cart.push({ id: product.id, name: product.name, price: product.price, qty: qty });
+      }
+      document.getElementById('qty-' + id).textContent = '1';
+      updateCartUI();
+      showToast('<i data-lucide="check-circle" style="width:16px;height:16px"></i> ' + product.name + ' added to cart!');
+      var btn = document.getElementById('add-' + id);
+      btn.innerHTML = '<i data-lucide="check"></i> Added';
+      btn.classList.add('added');
+      lucide.createIcons();
+      setTimeout(function () { btn.innerHTML = '<i data-lucide="plus-circle"></i> Add to Cart'; btn.classList.remove('added'); lucide.createIcons(); }, 1500);
+    }
+
+    function updateCartUI() {
+      var total = cart.reduce(function (s, i) { return s + i.price * i.qty; }, 0);
+      var count = cart.reduce(function (s, i) { return s + i.qty; }, 0);
+      var countEl = document.getElementById('cartCount');
+      countEl.textContent = count;
+      if (count === 0) { countEl.classList.add('hidden'); } else { countEl.classList.remove('hidden'); }
+      document.getElementById('cartTotal').textContent = '&#8369;' + total.toLocaleString();
+      document.getElementById('cartFooter').style.display = count > 0 ? 'block' : 'none';
+      renderCartItems();
+    }
+
+    function renderCartItems() {
+      var el = document.getElementById('cartItems');
+      if (cart.length === 0) {
+        el.innerHTML = '<div class="cart-empty"><span class="cart-empty-icon"><i data-lucide="shopping-bag" style="width:40px;height:40px;color:var(--text-light)"></i></span><p style="font-family:\'Cormorant Garamond\',serif;font-size:1.1rem;color:var(--text-mid);margin-top:1rem">Your cart is empty.</p></div>';
+        lucide.createIcons();
+        return;
+      }
+      el.innerHTML = cart.map(function (item) {
+        return '<div class="cart-item">' +
+          '<div class="cart-item-icon"><i data-lucide="package" style="width:20px;height:20px;color:var(--mocha)"></i></div>' +
+          '<div class="cart-item-info">' +
+          '<div class="cart-item-name">' + item.name + '</div>' +
+          '<div class="cart-item-price">&#8369;' + (item.price * item.qty).toLocaleString() + '</div>' +
+          '</div>' +
+          '<div class="cart-item-controls">' +
+          '<button class="ci-qty-btn" onclick="updateCartQty(' + item.id + ',-1)"><i data-lucide="minus"></i></button>' +
+          '<span class="ci-qty">' + item.qty + '</span>' +
+          '<button class="ci-qty-btn" onclick="updateCartQty(' + item.id + ',1)"><i data-lucide="plus"></i></button>' +
+          '<button class="cart-remove" onclick="removeFromCart(' + item.id + ')"><i data-lucide="trash-2"></i></button>' +
+          '</div>' +
+          '</div>';
+      }).join('');
+      lucide.createIcons();
+    }
+
+    function updateCartQty(id, delta) {
+      var item = cart.find(function (i) { return i.id === id; });
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) { removeFromCart(id); } else { updateCartUI(); }
+    }
+
+    function removeFromCart(id) {
+      cart = cart.filter(function (i) { return i.id !== id; });
+      updateCartUI();
+    }
+
+    function openCart() {
+      document.getElementById('cartSidebar').classList.add('open');
+      document.getElementById('cartOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCart() {
+      document.getElementById('cartSidebar').classList.remove('open');
+      document.getElementById('cartOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // ── CHECKOUT ──
+    function openCheckout() {
+      closeCart();
+      var total = cart.reduce(function (s, i) { return s + i.price * i.qty; }, 0);
+      var summaryEl = document.getElementById('orderSummaryItems');
+      summaryEl.innerHTML = cart.map(function (i) {
+        return '<div class="order-line"><span><i data-lucide="package" style="width:14px;height:14px;vertical-align:middle;margin-right:0.4rem"></i> ' + i.name + ' x' + i.qty + '</span><span>&#8369;' + (i.price * i.qty).toLocaleString() + '</span></div>';
+      }).join('');
+      lucide.createIcons();
+      document.getElementById('orderTotal').textContent = '₱' + total.toLocaleString();
+      document.getElementById('checkoutForm').style.display = 'block';
+      document.getElementById('orderSuccess').classList.remove('show');
+      document.getElementById('checkoutModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCheckout() {
+      document.getElementById('checkoutModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function placeOrder() {
+      var name = document.getElementById('co-name').value.trim();
+      var phone = document.getElementById('co-phone').value.trim();
+      var email = document.getElementById('co-email').value.trim();
+      var address = document.getElementById('co-address').value.trim();
+      var city = document.getElementById('co-city').value.trim();
+      var payment = document.getElementById('co-payment').value;
+      if (!name || !phone || !email || !address || !city || !payment) {
+        showToast('<i data-lucide="alert-circle" style="width:16px;height:16px"></i> Please fill in all required fields.'); return;
+      }
+      var ref = 'MP-' + Date.now().toString(36).toUpperCase();
+      document.getElementById('orderRef').textContent = ref;
+      document.getElementById('checkoutForm').style.display = 'none';
+      document.getElementById('orderSuccess').classList.add('show');
+      cart = [];
+      updateCartUI();
+    }
+
+    // ── APPOINTMENT ──
+    function bookAppointment() {
+      var name = document.getElementById('appt-name').value.trim();
+      var phone = document.getElementById('appt-phone').value.trim();
+      var email = document.getElementById('appt-email').value.trim();
+      var petname = document.getElementById('appt-petname').value.trim();
+      var pettype = document.getElementById('appt-pettype').value;
+      var service = document.getElementById('appt-service').value;
+      var date = document.getElementById('appt-date').value;
+      var time = document.getElementById('appt-time-sel').value;
+      if (!name || !phone || !email || !petname || !pettype || !service || !date || !time) {
+        showToast('<i data-lucide="alert-circle" style="width:16px;height:16px"></i> Please fill in all required fields.'); return;
+      }
+      var today = new Date(); today.setHours(0, 0, 0, 0);
+      var chosen = new Date(date + 'T00:00:00');
+      if (chosen < today) { showToast('<i data-lucide="calendar-x" style="width:16px;height:16px"></i> Please choose a future date.'); return; }
+      var ref = 'APT-' + Date.now().toString(36).toUpperCase();
+      document.getElementById('apptRef').textContent = ref;
+      document.getElementById('apptModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('appt-name').value = '';
+      document.getElementById('appt-phone').value = '';
+      document.getElementById('appt-email').value = '';
+      document.getElementById('appt-petname').value = '';
+      document.getElementById('appt-notes').value = '';
+      document.getElementById('appt-date').value = '';
+      document.getElementById('appt-pettype').selectedIndex = 0;
+      document.getElementById('appt-service').selectedIndex = 0;
+      document.getElementById('appt-time-sel').selectedIndex = 0;
+    }
+
+    function closeApptModal() {
+      document.getElementById('apptModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // ── TOAST ──
+    function showToast(msg) {
+      var t = document.getElementById('toast');
+      t.innerHTML = '<div style="display:flex;align-items:center;gap:0.6rem">' + msg + '</div>';
+      t.classList.add('show');
+      lucide.createIcons();
+      setTimeout(function () { t.classList.remove('show'); }, 2800);
+    }
+
+    // ── SCROLL FADE-IN ──
+    function observeFadeUps() {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry, i) {
+          if (entry.isIntersecting) {
+            setTimeout(function () { entry.target.classList.add('visible'); }, i * 80);
+          }
+        });
+      }, { threshold: 0.08 });
+      document.querySelectorAll('.fade-up:not(.visible)').forEach(function (el) { observer.observe(el); });
+    }
+
+    // ── NAV SHADOW ──
+    window.addEventListener('scroll', function () {
+      document.getElementById('mainNav').style.boxShadow =
+        window.scrollY > 50 ? '0 4px 30px rgba(44,26,14,0.1)' : 'none';
+    });
+
+    // ── MIN DATE ──
+    var todayStr = new Date().toISOString().split('T')[0];
+    document.getElementById('appt-date').setAttribute('min', todayStr);
+
+    // ── INIT ──
+    lucide.createIcons();
+    renderProducts();
+    observeFadeUps();
+  </script>
+</body>
+
+</html>
