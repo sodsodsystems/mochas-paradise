@@ -1,19 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Minus, Plus, PlusCircle, Check } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { PRODUCTS } from '../data/products';
 
 const Shop = () => {
-  const [products, setProducts] = useState(PRODUCTS);
-  const [qtys, setQtys] = useState({});
+  const [products] = useState(PRODUCTS);
+  const [qtys, setQtys] = useState(() => {
+    const initial = {};
+    PRODUCTS.forEach(p => initial[p.id] = 1);
+    return initial;
+  });
   const { addToCart } = useCart();
   const [addedStatus, setAddedStatus] = useState({});
-
-  useEffect(() => {
-    const initialQtys = {};
-    products.forEach(p => initialQtys[p.id] = 1);
-    setQtys(initialQtys);
-  }, [products]);
 
   const changeQty = (id, delta) => {
     setQtys(prev => ({
