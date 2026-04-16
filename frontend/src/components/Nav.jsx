@@ -12,7 +12,7 @@ const Nav = () => {
   return (
     <nav id="mainNav">
       <a href="#hero" className="nav-logo">
-        <img src="./MochasParadiseLogo.png" alt="Mocha's Paradise"
+        <img src="./mochas-paradise-logo-v1.png" alt="Mocha's Paradise"
           style={{ width: '42px', height: '42px', objectFit: 'contain' }} />
         <div className="nav-logo-text">Mocha's <span>Paradise</span></div>
       </a>
